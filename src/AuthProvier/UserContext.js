@@ -37,11 +37,13 @@ const UserContext = ({ children }) => {
 
   //   create user
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //   login user
   const userLogIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -58,15 +60,18 @@ const UserContext = ({ children }) => {
 
   //   google log in
   const googleLogIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // twitter log in
   const twitterLogIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, twitterProvider);
   };
 
   const githubLogIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
 

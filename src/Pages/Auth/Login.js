@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../Assets/login.gif";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import { toast } from "react-toastify";
@@ -7,6 +7,10 @@ import { toast } from "react-toastify";
 const Login = () => {
   const { userLogIn, googleLogIn, twitterLogIn, githubLogIn } =
     useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname;
+  console.log(from);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,6 +25,7 @@ const Login = () => {
 
     userLogIn(email, password)
       .then((res) => {
+        navigate(from, { replace: true });
         toast.success("Log in success!!", { autoClose: 500 });
       })
       .catch((err) => {
@@ -30,6 +35,7 @@ const Login = () => {
   // google log in
   const handleGoogle = () => {
     googleLogIn().then((res) => {
+      navigate(from, { replace: true });
       toast.success("Google log in success", { autoClose: 500 });
     });
   };
@@ -37,6 +43,7 @@ const Login = () => {
   // twitter log in
   const handleTwitter = () => {
     twitterLogIn().then((res) => {
+      navigate(from, { replace: true });
       toast.success("Twitter log in success", { autoClose: 500 });
     });
   };
@@ -44,6 +51,7 @@ const Login = () => {
   // github log in
   const handleGithub = () => {
     githubLogIn().then((res) => {
+      navigate(from, { replace: true });
       toast.success("Github log in success", { autoClose: 500 });
     });
   };
