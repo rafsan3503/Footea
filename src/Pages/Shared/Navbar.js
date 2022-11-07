@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo.gif";
+import { AuthContext } from "../../AuthProvier/UserContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   return (
-    <div className="px-4 py-6 mx-auto lg:py-8 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className="px-4 py-6 mx-auto lg:py-8  md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between lg:justify-center lg:space-x-16">
         <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
@@ -73,14 +76,14 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="/"
-              aria-label="Sign up"
-              title="Sign up"
-              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Sign up
-            </Link>
+            <div class="relative flex-shrink-0">
+              <span class="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
+              <img
+                src={user.photoURL}
+                alt=""
+                class="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+              />
+            </div>
           </li>
         </ul>
         <div className="lg:hidden">

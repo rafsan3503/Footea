@@ -1,8 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import login from "../../Assets/login.gif";
+import { AuthContext } from "../../AuthProvier/UserContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { userLogIn, googleLogIn, twitterLogIn, githubLogIn } =
+    useContext(AuthContext);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.password_confirmation.value;
+    if (password !== confirm) {
+      toast.error("password does not match", { autoClose: 500 });
+      return;
+    }
+
+    userLogIn(email, password)
+      .then((res) => {
+        toast.success("Log in success!!", { autoClose: 500 });
+      })
+      .catch((err) => {
+        toast.error(err.message, { autoClose: 500 });
+      });
+  };
+  // google log in
+  const handleGoogle = () => {
+    googleLogIn().then((res) => {
+      toast.success("Google log in success", { autoClose: 500 });
+    });
+  };
+
+  // twitter log in
+  const handleTwitter = () => {
+    twitterLogIn().then((res) => {
+      toast.success("Twitter log in success", { autoClose: 500 });
+    });
+  };
+
+  // github log in
+  const handleGithub = () => {
+    githubLogIn().then((res) => {
+      toast.success("Github log in success", { autoClose: 500 });
+    });
+  };
   return (
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -25,6 +69,7 @@ const Login = () => {
 
             <div className="my-6 space-y-4">
               <button
+                onClick={handleGoogle}
                 aria-label="Login with Google"
                 type="button"
                 className="flex items-center justify-center shadow-md shadow-teal-100 text-teal-400 w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"
@@ -39,6 +84,7 @@ const Login = () => {
                 <p>Login with Google</p>
               </button>
               <Link
+                onClick={handleGithub}
                 aria-label="Login with GitHub"
                 role="button"
                 className="flex items-center justify-center shadow-md shadow-teal-100 text-teal-400 w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"
@@ -53,6 +99,7 @@ const Login = () => {
                 <p>Login with GitHub</p>
               </Link>
               <Link
+                onClick={handleTwitter}
                 aria-label="Login with Twitter"
                 role="button"
                 className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400 shadow-md shadow-teal-100 text-teal-400"
@@ -72,7 +119,7 @@ const Login = () => {
               <p className="px-3 dark:text-gray-400">OR</p>
               <hr className="w-full dark:text-gray-400" />
             </div>
-            <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+            <form onSubmit={handleSubmit} class="mt-8 grid grid-cols-6 gap-6">
               <div class="col-span-6">
                 <label
                   for="Email"
@@ -83,8 +130,8 @@ const Login = () => {
 
                 <input
                   type="email"
-                  id="Email"
                   name="email"
+                  required
                   class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>
@@ -99,8 +146,8 @@ const Login = () => {
 
                 <input
                   type="password"
-                  id="Password"
                   name="password"
+                  required
                   class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>
@@ -117,6 +164,7 @@ const Login = () => {
                   type="password"
                   id="PasswordConfirmation"
                   name="password_confirmation"
+                  required
                   class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>

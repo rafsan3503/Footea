@@ -1,8 +1,68 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import signup from "../../Assets/signup.gif";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../AuthProvier/UserContext";
 
 const SignUp = () => {
+  const { createUser, googleLogIn, twitterLogIn, githubLogIn, updateUser } =
+    useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.password_confirmation.value;
+
+    // password validation
+    if (
+      !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(password)
+    ) {
+      toast.error(
+        "Password Must Have Letters, digits ,special characters and at least 8 character long",
+        { autoClose: 2000 }
+      );
+      return;
+    }
+
+    // password match
+    if (password !== confirm) {
+      toast.error("Password does not match!", { autoClose: 500 });
+      return;
+    }
+
+    // create user with email and password
+    createUser(email, password)
+      .then((res) => {
+        updateUser(name)
+          .then(() => {})
+          .then((err) => toast.error(err.message, { autoClose: 500 }));
+        toast.success("User created successfully!!", { autoClose: 500 });
+      })
+      .catch((error) => toast.error(error.message, { autoClose: 500 }));
+  };
+
+  // google log in
+  const handleGoogle = () => {
+    googleLogIn().then((res) => {
+      toast.success("Google log in success", { autoClose: 500 });
+    });
+  };
+
+  // twitter log in
+  const handleTwitter = () => {
+    twitterLogIn().then((res) => {
+      toast.success("Twitter log in success", { autoClose: 500 });
+    });
+  };
+
+  // github log in
+  const handleGithub = () => {
+    githubLogIn().then((res) => {
+      toast.success("Github log in success", { autoClose: 500 });
+    });
+  };
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -110,6 +170,7 @@ const SignUp = () => {
               </div>
               <div className="my-6 space-y-4 col-span-6">
                 <Link
+                  onClick={handleGoogle}
                   aria-label="Login with Google"
                   role="button"
                   className="flex items-center justify-center shadow-md shadow-teal-100 text-teal-400 w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"
@@ -123,6 +184,7 @@ const SignUp = () => {
                   </svg>
                 </Link>
                 <Link
+                  onClick={handleGithub}
                   aria-label="Login with GitHub"
                   role="button"
                   className="flex items-center justify-center shadow-md shadow-teal-100 text-teal-400 w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"
@@ -136,6 +198,7 @@ const SignUp = () => {
                   </svg>
                 </Link>
                 <Link
+                  onClick={handleTwitter}
                   aria-label="Login with Twitter"
                   role="button"
                   className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400 shadow-md shadow-teal-100 text-teal-400"

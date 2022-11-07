@@ -2,15 +2,26 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  TwitterAuthProvider,
+  updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
 
 const auth = getAuth(app);
 export const AuthContext = createContext();
 
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
+
 const UserContext = ({ children }) => {
-  const [user, setUser] = useState("mahmud");
+  const [user, setUser] = useState("");
   //   set loading
   const [loading, setLoading] = useState(true);
 
@@ -18,6 +29,7 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (current) => {
       setUser(current);
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -28,7 +40,47 @@ const UserContext = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const authInfo = { user, loading, createUser };
+  //   login user
+  const userLogIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  //   update user
+  const updateUser = (name) => {
+    return updateProfile(auth.currentUser, { displayName: name });
+  };
+
+  // log out
+  const logOut = () => {
+    localStorage.removeItem("access-token");
+    return signOut(auth);
+  };
+
+  //   google log in
+  const googleLogIn = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // twitter log in
+  const twitterLogIn = () => {
+    return signInWithPopup(auth, twitterProvider);
+  };
+
+  const githubLogIn = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
+  const authInfo = {
+    user,
+    loading,
+    createUser,
+    googleLogIn,
+    twitterLogIn,
+    githubLogIn,
+    updateUser,
+    userLogIn,
+    logOut,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
