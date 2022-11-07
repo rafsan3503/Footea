@@ -122,7 +122,7 @@ const Services = () => {
                 </p>
               </div>
               <Link
-                href="#"
+                to="/services/01"
                 class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
               >
                 View Details &#8594;
