@@ -10,22 +10,22 @@ const Gallery = () => {
         <img
           src="https://images.unsplash.com/photo-1533146303127-f2ef440cfeb5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
           alt=""
-          className="w-full h-full col-span-2 row-span-2 rounded shadow-sm min-h-96 md:col-start-3 md:row-start-1 dark:bg-gray-500 border-4 border-teal-200 aspect-square"
+          className="w-full h-full col-span-2 row-span-2 object-cover rounded shadow-sm min-h-96 md:col-start-3 md:row-start-1 dark:bg-gray-500 border-4 border-teal-200 aspect-square"
         />
         <img
           alt=""
-          className="w-full h-full rounded shadow-sm border-4 border-teal-200 min-h-48 dark:bg-gray-500 aspect-square"
-          src="https://source.unsplash.com/random/200x200/?0"
+          className="w-full h-full rounded object-cover shadow-sm border-4 border-teal-200 min-h-48 dark:bg-gray-500 aspect-square"
+          src="https://images.unsplash.com/photo-1534759846116-5799c33ce22a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=450&q=80"
         />
         <img
           alt=""
-          className="w-full h-full rounded shadow-sm border-4 border-teal-200 min-h-48 dark:bg-gray-500 aspect-square"
-          src="https://source.unsplash.com/random/200x200/?1"
+          className="w-full h-full rounded object-cover shadow-sm border-4 border-teal-200 min-h-48 dark:bg-gray-500 aspect-square"
+          src="https://images.unsplash.com/photo-1575436575914-3722bf068859?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
         />
         <img
           alt=""
           className="w-full h-full rounded shadow-sm border-4 object-cover border-teal-200 min-h-48 dark:bg-gray-500 aspect-square"
-          src="https://source.unsplash.com/random/200x200/?2"
+          src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=370&q=80"
         />
         <img
           alt=""

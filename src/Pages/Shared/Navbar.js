@@ -45,7 +45,11 @@ const Navbar = () => {
           title="Company"
           class="inline-flex items-center"
         >
-          <img src={logo} className="w-20" alt="" />
+          <div className="flex text-teal-400 items-center">
+            <span className="text-5xl font-bold">Fo</span>
+            <img src={logo} className="w-20" alt="" />
+            <span className="text-5xl font-bold">tea</span>
+          </div>
         </Link>
         <ul class="flex items-center hidden space-x-8 lg:flex">
           <li>
