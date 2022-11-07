@@ -2,46 +2,23 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo.gif";
 import { AuthContext } from "../../AuthProvier/UserContext";
+import userImg from "../../Assets/user.gif";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+
+  // log out
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Log out success!!", { autoClose: 500 });
+    });
+  };
   console.log(user);
   return (
-    <div className="px-4 py-6 mx-auto lg:py-8  md:px-24 lg:px-8">
+    <div className="px-4 py-6 mx-auto lg:py-8">
       <div className="relative flex items-center justify-between lg:justify-center lg:space-x-16">
-        <ul className="flex items-center hidden space-x-8 lg:flex">
-          <li>
-            <Link
-              href="/"
-              aria-label="Our product"
-              title="Our product"
-              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Product
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/"
-              aria-label="Our product"
-              title="Our product"
-              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Features
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/"
-              aria-label="Product pricing"
-              title="Product pricing"
-              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Pricing
-            </Link>
-          </li>
-        </ul>
         <Link
           href="/"
           aria-label="Company"
@@ -57,34 +34,102 @@ const Navbar = () => {
         <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
             <Link
+              to="/"
+              aria-label="Our product"
+              title="Home"
+              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/services"
+              aria-label="Our product"
+              title="Home"
+              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Services
+            </Link>
+          </li>
+          {user && (
+            <>
+              <li>
+                <Link
+                  href="/"
+                  aria-label="Our product"
+                  title="Our product"
+                  className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  My Reviews
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/"
+                  aria-label="Product pricing"
+                  title="Product pricing"
+                  className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  Add Service
+                </Link>
+              </li>
+            </>
+          )}
+          <li>
+            <Link
               href="/"
               aria-label="About us"
               title="About us"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              About us
+              Blogs
             </Link>
           </li>
           <li>
             <Link
-              to="/Login"
-              aria-label="Sign in"
-              title="Sign in"
+              href="/"
+              aria-label="About us"
+              title="About us"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Log in
+              FAQ
             </Link>
           </li>
-          <li>
-            <div class="relative flex-shrink-0">
-              <span class="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
-              <img
-                src={user.photoURL}
-                alt=""
-                class="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700"
-              />
-            </div>
-          </li>
+          {user ? (
+            <>
+              <li>
+                <div className="relative flex-shrink-0">
+                  <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-600 rounded-full text-gray-100"></span>
+                  <img
+                    src={user.photoURL ? user.photoURL : userImg}
+                    alt=""
+                    className="w-12 h-12 rounded-full bg-gray-500"
+                  />
+                </div>
+              </li>
+              <li>
+                <Link
+                  onClick={handleLogOut}
+                  href="#"
+                  className="inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
+                >
+                  Log Out
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link
+                to="/Login"
+                aria-label="Sign in"
+                title="Sign in"
+                className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                Log In
+              </Link>
+            </li>
+          )}
         </ul>
         <div className="lg:hidden">
           <button

@@ -60,7 +60,7 @@ const Login = () => {
 
         <main
           aria-label="Main"
-          class="flex items-center justify-center p-4 sm:px-12 lg:col-span-7 xl:col-span-6 shadow-lg shadow-teal-200 rounded-lg"
+          class="flex items-center justify-center pb-16 sm:px-12 lg:col-span-7 xl:col-span-6 shadow-lg shadow-teal-200 rounded-lg"
         >
           <div class="max-w-xl lg:max-w-3xl">
             <h2 className="text-teal-400 font-bold text-center my-4 text-3xl">
