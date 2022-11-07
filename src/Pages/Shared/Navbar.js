@@ -56,9 +56,9 @@ const Navbar = () => {
             <>
               <li>
                 <Link
-                  href="/"
+                  to="/myreviews"
                   aria-label="Our product"
-                  title="Our product"
+                  title="My Review"
                   className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   My Reviews
@@ -66,7 +66,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  href="/"
+                  to="/addservice"
                   aria-label="Product pricing"
                   title="Product pricing"
                   className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -78,9 +78,9 @@ const Navbar = () => {
           )}
           <li>
             <Link
-              href="/"
+              to="/blogs"
               aria-label="About us"
-              title="About us"
+              title="Blogs"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Blogs
@@ -88,9 +88,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/"
+              to="/faq"
               aria-label="About us"
-              title="About us"
+              title="FAQ"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               FAQ
