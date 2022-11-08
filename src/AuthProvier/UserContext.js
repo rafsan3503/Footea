@@ -9,7 +9,6 @@ import {
   signInWithPopup,
   signOut,
   TwitterAuthProvider,
-  updateEmail,
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
@@ -53,11 +52,6 @@ const UserContext = ({ children }) => {
     return updateProfile(auth.currentUser, { displayName: name });
   };
 
-  // update user email
-  const updateUserEmail = (email) => {
-    return updateEmail(auth.currentUser, email);
-  };
-
   // log out
   const logOut = () => {
     localStorage.removeItem("access-token");
@@ -76,6 +70,7 @@ const UserContext = ({ children }) => {
     return signInWithPopup(auth, twitterProvider);
   };
 
+  // github log in
   const githubLogIn = () => {
     setLoading(true);
     return signInWithPopup(auth, githubProvider);
@@ -91,7 +86,6 @@ const UserContext = ({ children }) => {
     updateUser,
     userLogIn,
     logOut,
-    updateUserEmail,
     setLoading,
   };
   return (

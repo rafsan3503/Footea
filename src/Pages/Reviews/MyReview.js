@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaTrash } from "react-icons/fa";
 
 const MyReview = () => {
+  const [reviews, setRevies] = useState([]);
   return (
     <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
       <table class="min-w-full divide-y divide-gray-200 text-sm">
         <thead class="bg-gray-100">
           <tr>
             <th class="sticky inset-y-0 left-0 bg-gray-100 px-4 py-2 text-left">
-              <label class="sr-only" for="SelectAll">
-                Select All
-              </label>
+              <label class="sr-only" for="SelectAll"></label>
 
               <input
                 class="h-5 w-5 rounded border-gray-200"
@@ -19,7 +19,7 @@ const MyReview = () => {
             </th>
             <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               <div class="flex items-center gap-2">
-                ID
+                UserID
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-gray-700"
@@ -36,7 +36,7 @@ const MyReview = () => {
             </th>
             <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               <div class="flex items-center gap-2">
-                Name
+                Service Name
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-gray-700"
@@ -53,7 +53,7 @@ const MyReview = () => {
             </th>
             <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               <div class="flex items-center gap-2">
-                Email
+                Review
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-gray-700"
@@ -70,7 +70,6 @@ const MyReview = () => {
             </th>
             <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
               <div class="flex items-center gap-2">
-                Amount
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4 text-gray-700"
@@ -85,9 +84,7 @@ const MyReview = () => {
                 </svg>
               </div>
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-              Status
-            </th>
+            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"></th>
           </tr>
         </thead>
 

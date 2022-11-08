@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvier/UserContext";
 
 const AddReview = ({ id, setReviews, serviceName }) => {
-  const { user, updateUserEmail } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,12 +22,6 @@ const AddReview = ({ id, setReviews, serviceName }) => {
       userId: user.uid,
       date: new Date(),
     };
-
-    updateUserEmail(email)
-      .then(() => {
-        toast.success("email update success!");
-      })
-      .catch();
 
     fetch("http://localhost:5000/reviews", {
       method: "POST",
@@ -84,8 +78,10 @@ const AddReview = ({ id, setReviews, serviceName }) => {
                     }
                     type="email"
                     name="email"
-                    defaultValue={user.email && user.email}
-                    readOnly={user.email && true}
+                    defaultValue={
+                      user.email ? user.email : `${user.uid}@gmail.com`
+                    }
+                    readOnly
                     required
                   />
                 </div>
