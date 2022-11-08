@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvier/UserContext";
 
-const AddReview = ({ id, setReviews }) => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+const AddReview = ({ id, setReviews, serviceName }) => {
+  const { user, updateUserEmail } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -19,7 +18,16 @@ const AddReview = ({ id, setReviews }) => {
       email: email,
       review: review,
       serviceId: id,
+      serviceName: serviceName,
+      userId: user.uid,
+      date: new Date(),
     };
+
+    updateUserEmail(email)
+      .then(() => {
+        toast.success("email update success!");
+      })
+      .catch();
 
     fetch("http://localhost:5000/reviews", {
       method: "POST",
@@ -36,6 +44,7 @@ const AddReview = ({ id, setReviews }) => {
             .then((res) => res.json())
             .then((data) => {
               setReviews(data);
+
               form.reset();
             });
         }
@@ -68,10 +77,14 @@ const AddReview = ({ id, setReviews }) => {
                   </label>
                   <input
                     class="w-full rounded-lg border-teal-200 outline-none shadow-md shadow-teal-100 p-3 text-sm"
-                    placeholder="Email address"
+                    placeholder={
+                      user.email
+                        ? "Email Address"
+                        : "No Email found for this user, Please type your email!"
+                    }
                     type="email"
                     name="email"
-                    defaultValue={user.email ? user.email : "user@gmail.com"}
+                    defaultValue={user.email && user.email}
                     readOnly={user.email && true}
                     required
                   />

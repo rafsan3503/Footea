@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthProvier/UserContext";
-import PrivateRouter from "../../Routes/PrivateRouter";
 import AddReview from "./AddReview";
 
 const Reviews = ({ service }) => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const location = useLocation();
   const { name, _id } = service;
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${_id}`)
@@ -84,14 +84,13 @@ const Reviews = ({ service }) => {
 
         {user ? (
           <>
-            <PrivateRouter>
-              <AddReview id={_id} setReviews={setReviews} />
-            </PrivateRouter>
+            <AddReview id={_id} serviceName={name} setReviews={setReviews} />
           </>
         ) : (
           <div className="text-center my-10">
             <Link
               to="/login"
+              state={{ from: location }}
               className="inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
             >
               Please login to add review
