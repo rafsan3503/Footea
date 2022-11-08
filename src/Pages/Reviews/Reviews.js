@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvier/UserContext";
+import PrivateRouter from "../../Routes/PrivateRouter";
 import AddReview from "./AddReview";
 
 const Reviews = ({ service }) => {
@@ -83,7 +84,9 @@ const Reviews = ({ service }) => {
 
         {user ? (
           <>
-            <AddReview id={_id} />
+            <PrivateRouter>
+              <AddReview id={_id} setReviews={setReviews} />
+            </PrivateRouter>
           </>
         ) : (
           <div className="text-center my-10">

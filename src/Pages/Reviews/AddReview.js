@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../AuthProvier/UserContext";
 
-const AddReview = ({ id }) => {
+const AddReview = ({ id, setReviews }) => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -26,11 +30,16 @@ const AddReview = ({ id }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
+        if (data.acknowledged) {
+          toast.success("Review added!", { autoClose: 500 });
+          fetch(`http://localhost:5000/reviews/${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+              setReviews(data);
+              form.reset();
+            });
         }
       });
-
-    console.log(name, email, photoUrl, review);
   };
   return (
     <section class="bg-gray-100 my-10">
@@ -47,6 +56,7 @@ const AddReview = ({ id }) => {
                   placeholder="Name"
                   type="text"
                   name="name"
+                  defaultValue={user.displayName}
                   required
                 />
               </div>
@@ -61,6 +71,8 @@ const AddReview = ({ id }) => {
                     placeholder="Email address"
                     type="email"
                     name="email"
+                    defaultValue={user.email ? user.email : "user@gmail.com"}
+                    readOnly={user.email && true}
                     required
                   />
                 </div>
@@ -74,6 +86,7 @@ const AddReview = ({ id }) => {
                     placeholder="Photo Url"
                     type="text"
                     name="photoUrl"
+                    defaultValue={user.photoURL}
                     id="phone"
                     required
                   />
