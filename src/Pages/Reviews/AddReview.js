@@ -1,21 +1,53 @@
 import React from "react";
 
-const AddReview = () => {
+const AddReview = ({ id }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photoUrl = form.photoUrl.value;
+    const review = form.review.value;
+
+    const userReview = {
+      name: name,
+      imgUrl: photoUrl,
+      email: email,
+      review: review,
+      serviceId: id,
+    };
+
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+        }
+      });
+
+    console.log(name, email, photoUrl, review);
+  };
   return (
     <section class="bg-gray-100 my-10">
       <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div>
           <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-            <form action="" class="space-y-4">
+            <form onSubmit={handleSubmit} class="space-y-4">
               <div>
                 <label class="sr-only" for="name">
                   Name
                 </label>
                 <input
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  class="w-full rounded-lg border-teal-200 outline-none shadow-md shadow-teal-100 p-3 text-sm"
                   placeholder="Name"
                   type="text"
-                  id="name"
+                  name="name"
+                  required
                 />
               </div>
 
@@ -25,42 +57,47 @@ const AddReview = () => {
                     Email
                   </label>
                   <input
-                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                    class="w-full rounded-lg border-teal-200 outline-none shadow-md shadow-teal-100 p-3 text-sm"
                     placeholder="Email address"
                     type="email"
-                    id="email"
+                    name="email"
+                    required
                   />
                 </div>
 
                 <div>
                   <label class="sr-only" for="phone">
-                    Phone
+                    Photo Url
                   </label>
                   <input
-                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                    placeholder="Phone Number"
-                    type="tel"
+                    class="w-full rounded-lg border-teal-200 outline-none shadow-md shadow-teal-100 p-3 text-sm"
+                    placeholder="Photo Url"
+                    type="text"
+                    name="photoUrl"
                     id="phone"
+                    required
                   />
                 </div>
               </div>
 
               <div>
                 <label class="sr-only" for="message">
-                  Message
+                  Review
                 </label>
                 <textarea
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Message"
+                  class="w-full rounded-lg border-teal-200 outline-none shadow-md shadow-teal-100 p-3 text-sm"
+                  placeholder="Review"
                   rows="8"
                   id="message"
+                  name="review"
+                  required
                 ></textarea>
               </div>
 
               <div class="mt-4">
                 <button
                   type="submit"
-                  class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
+                  class="inline-flex w-full items-center justify-center rounded-lg bg-teal-300 px-5 py-3 text-white sm:w-auto"
                 >
                   <span class="font-medium"> Add Review </span>
 
