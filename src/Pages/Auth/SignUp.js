@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signup from "../../Assets/signup.gif";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvier/UserContext";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../AuthProvier/UserContext";
 const SignUp = () => {
   const { createUser, googleLogIn, twitterLogIn, githubLogIn, updateUser } =
     useContext(AuthContext);
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -36,7 +37,23 @@ const SignUp = () => {
     createUser(email, password)
       .then((res) => {
         updateUser(name)
-          .then(() => {})
+          .then((res) => {
+            const user = {
+              email,
+            };
+            fetch("http://localhost:5000/jwt", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                localStorage.setItem("access-token", data.token);
+              });
+          })
           .then((err) => toast.error(err.message, { autoClose: 500 }));
         toast.success("User created successfully!!", { autoClose: 500 });
       })
@@ -46,6 +63,23 @@ const SignUp = () => {
   // google log in
   const handleGoogle = () => {
     googleLogIn().then((res) => {
+      const email = res.user.email;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
+      navigate("/");
       toast.success("Google log in success", { autoClose: 500 });
     });
   };
@@ -53,6 +87,24 @@ const SignUp = () => {
   // twitter log in
   const handleTwitter = () => {
     twitterLogIn().then((res) => {
+      const userId = res.user.uid;
+      const email = `${userId}@gmail.com`;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
+      navigate("/");
       toast.success("Twitter log in success", { autoClose: 500 });
     });
   };
@@ -60,6 +112,25 @@ const SignUp = () => {
   // github log in
   const handleGithub = () => {
     githubLogIn().then((res) => {
+      const userId = res.user.uid;
+      const email = `${userId}@gmail.com`;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
+
+      navigate("/");
       toast.success("Github log in success", { autoClose: 500 });
     });
   };

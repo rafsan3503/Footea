@@ -7,11 +7,20 @@ import { Link } from "react-router-dom";
 
 const MyReview = () => {
   const [reviews, setReviews] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const email = user.email || `${user.uid}@gmail.com`;
   useEffect(() => {
-    fetch(`http://localhost:5000/myreviews?email=${email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/myreviews?email=${email}`, {
+      headers: {
+        authorization: localStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        if (res.status(401) || res.status(403)) {
+          logOut().then().catch();
+        }
+        return res.json();
+      })
       .then((data) => {
         setReviews(data);
       });

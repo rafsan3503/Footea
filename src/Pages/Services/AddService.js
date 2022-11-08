@@ -1,7 +1,10 @@
 import React from "react";
 import addProduct from "../../Assets/add-products.gif";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddService = () => {
+  const navigate = useNavigate();
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -10,7 +13,6 @@ const AddService = () => {
     const price = form.price.value;
     const rating = form.rating.value;
     const description = form.description.value;
-    console.log(name);
 
     const service = {
       name,
@@ -28,8 +30,16 @@ const AddService = () => {
       },
       body: JSON.stringify(service),
     })
-      .then((res) => res.json)
-      .then((data) => console.log(data));
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          Swal.fire({
+            icon: "success",
+            text: "Service Added successfully!!",
+          });
+          navigate("/services");
+        }
+      });
   };
   return (
     <section class="bg-gray-100">

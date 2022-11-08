@@ -9,7 +9,7 @@ const Login = () => {
     useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname;
+  const from = location.state?.from?.pathname || "/";
   console.log(from);
 
   const handleSubmit = (event) => {
@@ -23,8 +23,25 @@ const Login = () => {
       return;
     }
 
+    const user = {
+      email,
+    };
+
     userLogIn(email, password)
       .then((res) => {
+        navigate(from, { replace: true });
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.token);
+          });
         navigate(from, { replace: true });
         toast.success("Log in success!!", { autoClose: 500 });
       })
@@ -35,6 +52,22 @@ const Login = () => {
   // google log in
   const handleGoogle = () => {
     googleLogIn().then((res) => {
+      const email = res.user.email;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
       navigate(from, { replace: true });
       toast.success("Google log in success", { autoClose: 500 });
     });
@@ -43,6 +76,23 @@ const Login = () => {
   // twitter log in
   const handleTwitter = () => {
     twitterLogIn().then((res) => {
+      const userId = res.user.uid;
+      const email = `${userId}@gmail.com`;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
       navigate(from, { replace: true });
       toast.success("Twitter log in success", { autoClose: 500 });
     });
@@ -51,6 +101,24 @@ const Login = () => {
   // github log in
   const handleGithub = () => {
     githubLogIn().then((res) => {
+      const userId = res.user.uid;
+      const email = `${userId}@gmail.com`;
+      const user = {
+        email,
+      };
+      fetch("http://localhost:5000/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.token);
+        });
+
       navigate(from, { replace: true });
       toast.success("Github log in success", { autoClose: 500 });
     });
