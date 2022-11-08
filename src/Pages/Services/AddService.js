@@ -1,136 +1,119 @@
 import React from "react";
+import addProduct from "../../Assets/add-products.gif";
 
 const AddService = () => {
+  const handleAddProduct = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const img = form.photoUrl.value;
+    const price = form.price.value;
+    const rating = form.rating.value;
+    const description = form.description.value;
+    console.log(name);
+
+    const service = {
+      name,
+      img,
+      price,
+      rating,
+      description,
+      date: new Date(),
+    };
+
+    fetch("http://localhost:5000/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json)
+      .then((data) => console.log(data));
+  };
   return (
     <section class="bg-gray-100">
       <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div class="lg:col-span-2 lg:py-12">
-            <p class="max-w-xl text-lg">
-              At the same time, the fact that we are wholly owned and totally
-              independent from manufacturer and other group control gives you
-              confidence that we will only recommend what is right for you.
-            </p>
-
-            <div class="mt-8">
-              <a href="" class="text-2xl font-bold text-pink-600">
-                0151 475 4450
-              </a>
-
-              <address class="mt-2 not-italic">
-                282 Kevin Brook, Imogeneborough, CA 58517
-              </address>
-            </div>
+            <img src={addProduct} alt="" />
           </div>
 
           <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-            <form action="" class="space-y-4">
+            <form onSubmit={handleAddProduct} class="space-y-4">
               <div>
                 <label class="sr-only" for="name">
                   Name
                 </label>
                 <input
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  class="w-full rounded-lg shadow-md shadow-teal-200 outline-none p-3 text-sm"
                   placeholder="Name"
                   type="text"
-                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="sr-only" for="phone">
+                  Photo Url
+                </label>
+                <input
+                  class="w-full rounded-lg shadow-md shadow-teal-200 outline-none p-3 text-sm"
+                  placeholder="Photo Url"
+                  type="text"
+                  name="photoUrl"
+                  required
                 />
               </div>
 
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label class="sr-only" for="email">
-                    Email
+                    price
                   </label>
                   <input
-                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                    placeholder="Email address"
-                    type="email"
-                    id="email"
+                    class="w-full rounded-lg shadow-md shadow-teal-200 outline-none p-3 text-sm"
+                    placeholder="Price"
+                    type="text"
+                    name="price"
+                    required
                   />
                 </div>
 
                 <div>
                   <label class="sr-only" for="phone">
-                    Phone
+                    Rating
                   </label>
                   <input
-                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                    placeholder="Phone Number"
-                    type="tel"
-                    id="phone"
+                    class="w-full rounded-lg shadow-md shadow-teal-200 outline-none p-3 text-sm"
+                    placeholder="Rating"
+                    type="text"
+                    name="rating"
+                    required
                   />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                <div>
-                  <input
-                    class="sr-only"
-                    id="option1"
-                    type="radio"
-                    tabindex="-1"
-                  />
-                  <label
-                    for="option1"
-                    class="block w-full rounded-lg border border-gray-200 p-3"
-                    tabindex="0"
-                  >
-                    <span class="text-sm font-medium"> Option 1 </span>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="sr-only"
-                    id="option2"
-                    type="radio"
-                    tabindex="-1"
-                  />
-                  <label
-                    for="option2"
-                    class="block w-full rounded-lg border border-gray-200 p-3"
-                    tabindex="0"
-                  >
-                    <span class="text-sm font-medium"> Option 2 </span>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="sr-only"
-                    id="option3"
-                    type="radio"
-                    tabindex="-1"
-                  />
-                  <label
-                    for="option3"
-                    class="block w-full rounded-lg border border-gray-200 p-3"
-                    tabindex="0"
-                  >
-                    <span class="text-sm font-medium"> Option 3 </span>
-                  </label>
                 </div>
               </div>
 
               <div>
                 <label class="sr-only" for="message">
-                  Message
+                  Description
                 </label>
                 <textarea
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Message"
+                  class="w-full rounded-lg shadow-md shadow-teal-200 outline-none p-3 text-sm"
+                  placeholder="Description"
+                  name="description"
+                  required
                   rows="8"
-                  id="message"
                 ></textarea>
               </div>
 
               <div class="mt-4">
                 <button
                   type="submit"
-                  class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
+                  class="inline-flex w-full items-center justify-center rounded-lg bg-teal-300 px-5 py-3 text-white sm:w-auto"
                 >
-                  <span class="font-medium"> Send Enquiry </span>
+                  <span class="font-medium"> Add Service </span>
 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

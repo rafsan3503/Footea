@@ -39,7 +39,11 @@ const ServicesBanner = () => {
 
                 <PhotoProvider>
                   <PhotoView src={service.img}>
-                    <img alt="Trainer" src={service.img} />
+                    <img
+                      alt="Trainer"
+                      src={service.img}
+                      className="h-96 w-full object-cover"
+                    />
                   </PhotoView>
                 </PhotoProvider>
 

@@ -9,7 +9,6 @@ const MyReview = () => {
   const [reviews, setReviews] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user.email || `${user.uid}@gmail.com`;
-  console.log(reviews.length);
   useEffect(() => {
     fetch(`http://localhost:5000/myreviews?email=${email}`)
       .then((res) => res.json())
@@ -45,6 +44,46 @@ const MyReview = () => {
           });
       }
     });
+  };
+
+  // update review
+  const handleUpdate = async (review) => {
+    const { value: text } = await Swal.fire({
+      input: "textarea",
+      inputLabel: "Update this Review",
+      inputValue: review.review,
+      inputPlaceholder: "Type your message here...",
+      inputAttributes: {
+        "aria-label": "Type your message here",
+      },
+      showCancelButton: true,
+    });
+
+    const userReview = {
+      review: text,
+    };
+
+    if (text) {
+      fetch(`http://localhost:5000/myreviews/${review._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userReview),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.modifiedCount > 0) {
+            fetch(`http://localhost:5000/myreviews?email=${email}`)
+              .then((res) => res.json())
+              .then((data) => {
+                setReviews(data);
+              });
+          }
+        });
+      Swal.fire("Review updated successfully!");
+    }
   };
   return (
     <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
@@ -142,12 +181,23 @@ const MyReview = () => {
                 {review.serviceName}
               </td>
               <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                {review.review.slice(0, 20) + "..."}
+                {review.review.length > 20
+                  ? review.review.slice(0, 20) + "..."
+                  : review.review}
+                <Link
+                  to={`/services/${review.serviceId}`}
+                  class="inline-block rounded bg-teal-500 px-2 py-2 mx-3 text-sm text-white"
+                >
+                  View
+                </Link>
               </td>
               <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                 {review.serviceId}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 flex items-center">
+              <td
+                onClick={() => handleUpdate(review)}
+                class="whitespace-nowrap px-4 py-2 flex items-center"
+              >
                 <strong class="rounded bg-teal-100 text-xs font-medium text-teal-400 p-2 cursor-pointer">
                   Update
                 </strong>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import AddReview from "./AddReview";
+import reviewNotFound from "../../Assets/review-not-found.gif";
 
 const Reviews = ({ service }) => {
   const { user } = useContext(AuthContext);
@@ -81,6 +82,14 @@ const Reviews = ({ service }) => {
             </div>
           ))}
         </div>
+        {reviews.length === 0 && (
+          <div className="text-center">
+            <img src={reviewNotFound} alt="" className="w-1/2 mx-auto" />
+            <h2 className="text-red-500 font-bold">
+              No Review Found!! please add some{" "}
+            </h2>
+          </div>
+        )}
 
         {user ? (
           <>
