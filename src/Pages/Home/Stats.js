@@ -10,8 +10,7 @@ const Stats = () => {
           </h2>
 
           <p className="mt-4 text-black sm:text-xl">
-            The art or process of producing images by the action of radiant
-            energy and especially light on a sensitive surface
+            "A photograph is usually looked at - seldom looked into."
           </p>
         </div>
 

@@ -5,7 +5,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 const ServicesBanner = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/services?size=3")
+    fetch("https://footeo-server.vercel.app/services?size=3")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
@@ -80,7 +80,7 @@ const ServicesBanner = () => {
 
           <div className="text-center">
             <Link
-              href="#"
+              href="/services"
               class="mt-6 inline-block rounded border-2 border-teal-200 font-medium text-teal-500 hover:bg-teal-500 px-6 py-3 text-lg hover:text-white"
             >
               See All &#8594;

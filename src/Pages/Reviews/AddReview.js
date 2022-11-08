@@ -23,7 +23,7 @@ const AddReview = ({ id, setReviews, serviceName }) => {
       date: new Date(),
     };
 
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://footeo-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,7 +34,7 @@ const AddReview = ({ id, setReviews, serviceName }) => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Review added!", { autoClose: 500 });
-          fetch(`http://localhost:5000/reviews/${id}`)
+          fetch(`https://footeo-server.vercel.app/reviews/${id}`)
             .then((res) => res.json())
             .then((data) => {
               setReviews(data);

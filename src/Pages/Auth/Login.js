@@ -31,7 +31,7 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         navigate(from, { replace: true });
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://footeo-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -57,7 +57,7 @@ const Login = () => {
       const user = {
         email,
       };
-      fetch("http://localhost:5000/jwt", {
+      fetch("https://footeo-server.vercel.app/jwt", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -82,7 +82,7 @@ const Login = () => {
       const user = {
         email,
       };
-      fetch("http://localhost:5000/jwt", {
+      fetch("https://footeo-server.vercel.app/jwt", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -107,7 +107,7 @@ const Login = () => {
       const user = {
         email,
       };
-      fetch("http://localhost:5000/jwt", {
+      fetch("https://footeo-server.vercel.app/jwt", {
         method: "POST",
         headers: {
           "content-type": "application/json",

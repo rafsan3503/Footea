@@ -11,7 +11,7 @@ const MyReview = () => {
   const { user, logOut } = useContext(AuthContext);
   const email = user.email || `${user.uid}@gmail.com`;
   useEffect(() => {
-    fetch(`http://localhost:5000/myreviews?email=${email}`, {
+    fetch(`https://footeo-server.vercel.app/myreviews?email=${email}`, {
       headers: {
         authorization: localStorage.getItem("access-token"),
       },
@@ -40,7 +40,7 @@ const MyReview = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/myreviews/${review._id}`, {
+        fetch(`https://footeo-server.vercel.app/myreviews/${review._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -74,7 +74,7 @@ const MyReview = () => {
     };
 
     if (text) {
-      fetch(`http://localhost:5000/myreviews/${review._id}`, {
+      fetch(`https://footeo-server.vercel.app/myreviews/${review._id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -85,7 +85,7 @@ const MyReview = () => {
         .then((data) => {
           console.log(data);
           if (data.modifiedCount > 0) {
-            fetch(`http://localhost:5000/myreviews?email=${email}`)
+            fetch(`https://footeo-server.vercel.app/myreviews?email=${email}`)
               .then((res) => res.json())
               .then((data) => {
                 setReviews(data);
