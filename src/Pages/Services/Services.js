@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { AuthContext } from "../../AuthProvier/UserContext";
+import loader from "../../Assets/loader.gif";
 
 const Services = () => {
+  const [services, setServices] = useState([]);
+  const { loading, setLoading } = useContext(AuthContext);
+  useEffect(() => {
+    fetch("http://localhost:5000/services")
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      });
+  }, [setLoading]);
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
   return (
     <section>
       <div class="mx-auto max-w-screen-xl px-4 py-8">
@@ -15,120 +34,47 @@ const Services = () => {
         </div>
 
         <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3">
-          <Link href="#" class="block shadow-lg shadow-teal-200 rounded-lg">
-            <div class="flex justify-center">
-              <strong class="relative h-6 bg-teal-400 px-4 text-xs uppercase leading-6 text-white">
-                Featured
-              </strong>
-            </div>
+          {services.map((service) => (
+            <Link
+              key={service._id}
+              href="#"
+              class="block shadow-lg shadow-teal-200 rounded-lg"
+            >
+              <PhotoProvider>
+                <PhotoView src={service.img}>
+                  <img alt="Trainer" src={service.img} />
+                </PhotoView>
+              </PhotoProvider>
 
-            <PhotoProvider>
-              <PhotoView src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80">
-                <img
-                  alt="Trainer"
-                  src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="-mt-3 h-[350px] w-full object-cover sm:h-[450px]"
-                />
-              </PhotoView>
-            </PhotoProvider>
+              <div className="p-3">
+                <h2 className="text-3xl font-bold text-teal-400 my-4">
+                  {service.name}
+                </h2>
+                <div class="mt-4 flex items-center justify-between font-medium">
+                  <p className="text-teal-400 font-semibold">
+                    Price: ${service.price}
+                  </p>
 
-            <div className="p-3">
-              <div class="mt-4 flex items-center justify-between font-medium">
-                <p className="text-teal-400 font-semibold">Price: $189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">Ratings: 5star</p>
+                  <p class="text-xs uppercase tracking-wide">
+                    Ratings: {service.rating}
+                  </p>
+                </div>
+                <div className="my-3">
+                  <p>
+                    {service.description.length > 80
+                      ? service.description.slice(0, 80) + "..."
+                      : service.description}
+                  </p>
+                </div>
+                <Link
+                  to={`/services/${service._id}`}
+                  class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
+                >
+                  View Details &#8594;
+                </Link>
               </div>
-              <div className="my-3">
-                <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempora sunt perferendis animi voluptatibus qui suscipit
-                  tempore. Itaque iste omnis voluptas!
-                </p>
-              </div>
-              <Link
-                href="#"
-                class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
-              >
-                View Details &#8594;
-              </Link>
-            </div>
-          </Link>
-          <Link href="#" class="block shadow-lg shadow-teal-200 rounded-lg">
-            <div class="flex justify-center">
-              <strong class="relative h-6 bg-teal-400 px-4 text-xs uppercase leading-6 text-white">
-                Featured
-              </strong>
-            </div>
-
-            <PhotoProvider>
-              <PhotoView src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80">
-                <img
-                  alt="Trainer"
-                  src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="-mt-3 h-[350px] w-full object-cover sm:h-[450px]"
-                />
-              </PhotoView>
-            </PhotoProvider>
-
-            <div className="p-3">
-              <div class="mt-4 flex items-center justify-between font-medium">
-                <p className="text-teal-400 font-semibold">Price: $189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">Ratings: 5star</p>
-              </div>
-              <div className="my-3">
-                <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempora sunt perferendis animi voluptatibus qui suscipit
-                  tempore. Itaque iste omnis voluptas!
-                </p>
-              </div>
-              <Link
-                href="#"
-                class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
-              >
-                View Details &#8594;
-              </Link>
-            </div>
-          </Link>
-          <Link href="#" class="block shadow-lg shadow-teal-200 rounded-lg">
-            <div class="flex justify-center">
-              <strong class="relative h-6 bg-teal-400 px-4 text-xs uppercase leading-6 text-white">
-                Featured
-              </strong>
-            </div>
-
-            <PhotoProvider>
-              <PhotoView src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80">
-                <img
-                  alt="Trainer"
-                  src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="-mt-3 h-[350px] w-full object-cover sm:h-[450px]"
-                />
-              </PhotoView>
-            </PhotoProvider>
-
-            <div className="p-3">
-              <div class="mt-4 flex items-center justify-between font-medium">
-                <p className="text-teal-400 font-semibold">Price: $189.99</p>
-
-                <p class="text-xs uppercase tracking-wide">Ratings: 5star</p>
-              </div>
-              <div className="my-3">
-                <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempora sunt perferendis animi voluptatibus qui suscipit
-                  tempore. Itaque iste omnis voluptas!
-                </p>
-              </div>
-              <Link
-                to="/services/01"
-                class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
-              >
-                View Details &#8594;
-              </Link>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
