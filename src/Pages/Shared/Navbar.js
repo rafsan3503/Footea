@@ -15,7 +15,6 @@ const Navbar = () => {
       toast.success("Log out success!!", { autoClose: 500 });
     });
   };
-  console.log(user);
   return (
     <div className="px-4 py-6 mx-auto lg:py-8">
       <div className="relative flex items-center justify-between lg:justify-center lg:space-x-16">
@@ -121,7 +120,7 @@ const Navbar = () => {
             </li>
           )}
         </ul>
-        <div className="lg:hidden">
+        <div className="lg:hidden z-10">
           <button
             aria-label="Open Menu"
             title="Open Menu"
@@ -145,20 +144,14 @@ const Navbar = () => {
           </button>
           {isMenuOpen && (
             <div className="absolute top-0 left-0 w-full">
-              <div className="p-5 bg-white border rounded shadow-sm">
+              <div className="p-5 bg-white border rounded shadow-sm z-10">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <a
-                      href="/"
-                      aria-label="Company"
-                      title="Company"
-                      className="inline-flex items-center"
-                    >
+                    <div className="flex text-teal-400 items-center">
+                      <span className="text-5xl font-bold">FO</span>
                       <img src={logo} className="w-20" alt="" />
-                      <span className="ml-2 text-xl font-bold tracking-wide text-teal-400 uppercase">
-                        Company
-                      </span>
-                    </a>
+                      <span className="text-5xl font-bold">TEA</span>
+                    </div>
                   </div>
                   <div>
                     <button
@@ -179,65 +172,93 @@ const Navbar = () => {
                 <nav>
                   <ul className="space-y-4">
                     <li>
-                      <a
-                        href="/"
+                      <Link
+                        to="/"
                         aria-label="Our product"
-                        title="Our product"
+                        title="Home"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Product
-                      </a>
+                        Home
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/"
+                      <Link
+                        to="/services"
                         aria-label="Our product"
-                        title="Our product"
+                        title="Home"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Features
-                      </a>
+                        Services
+                      </Link>
                     </li>
+                    {user && (
+                      <>
+                        <li>
+                          <Link
+                            to="/myreviews"
+                            aria-label="Our product"
+                            title="My Review"
+                            className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            My Reviews
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/addservice"
+                            aria-label="Product pricing"
+                            title="Product pricing"
+                            className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            Add Service
+                          </Link>
+                        </li>
+                      </>
+                    )}
                     <li>
-                      <a
-                        href="/"
-                        aria-label="Product pricing"
-                        title="Product pricing"
-                        className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        Pricing
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
+                      <Link
+                        to="/blogs"
                         aria-label="About us"
-                        title="About us"
+                        title="Blogs"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        About us
-                      </a>
+                        Blogs
+                      </Link>
                     </li>
-                    <li>
-                      <a
-                        href="/"
-                        aria-label="Sign in"
-                        title="Sign in"
-                        className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        Sign in
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        aria-label="Sign up"
-                        title="Sign up"
-                      >
-                        Sign up
-                      </a>
-                    </li>
+                    {user ? (
+                      <>
+                        <li>
+                          <div className="relative flex-shrink-0">
+                            <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-600 rounded-full text-gray-100"></span>
+                            <img
+                              src={user.photoURL ? user.photoURL : userImg}
+                              alt=""
+                              className="w-12 h-12 rounded-full bg-gray-500"
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <Link
+                            onClick={handleLogOut}
+                            href="#"
+                            className="inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
+                          >
+                            Log Out
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <li>
+                        <Link
+                          to="/Login"
+                          aria-label="Sign in"
+                          title="Sign in"
+                          className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        >
+                          Log In
+                        </Link>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               </div>

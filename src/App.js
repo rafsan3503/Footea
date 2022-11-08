@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 
 function App() {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto font-poppins">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Footea - Home</title>

@@ -39,7 +39,7 @@ const Services = () => {
           </h2>
         </div>
 
-        <div class="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3">
+        <div class="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-3">
           {services.map((service) => (
             <Link
               key={service._id}

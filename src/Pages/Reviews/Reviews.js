@@ -23,9 +23,9 @@ const Reviews = ({ service }) => {
           </h2>
         </div>
 
-        <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3">
+        <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-1 sm:gap-16 lg:grid-cols-1">
           {reviews.map((review) => (
-            <div>
+            <div className="lg:w-1/2 mx-auto">
               <img
                 alt="Woman"
                 src={review.imgUrl}

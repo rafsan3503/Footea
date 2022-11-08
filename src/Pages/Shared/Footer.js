@@ -7,7 +7,11 @@ const Footer = () => {
     <footer aria-label="Site Footer" className="bg-base-100 text-teal-400">
       <div className="mx-auto max-w-screen-xl space-y-12 px-4 py-16 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <img src={logo} className="w-20" alt="" />
+          <div className="flex text-teal-400 items-center">
+            <span className="text-5xl font-bold">FO</span>
+            <img src={logo} className="w-20" alt="" />
+            <span className="text-5xl font-bold">TEA</span>
+          </div>
 
           <div className="mt-8 flex gap-6 text-gray-500 sm:mt-0">
             <Link

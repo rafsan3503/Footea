@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signup from "../../Assets/signup.gif";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import { Helmet } from "react-helmet";
+import loader from "../../Assets/loader.gif";
 
 const SignUp = () => {
   const { createUser, googleLogIn, twitterLogIn, githubLogIn, updateUser } =
     useContext(AuthContext);
+  const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
+    setSpinner(true);
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -53,6 +56,8 @@ const SignUp = () => {
               .then((data) => {
                 console.log(data);
                 localStorage.setItem("access-token", data.token);
+                setSpinner(false);
+                navigate("/");
               });
           })
           .then((err) => toast.error(err.message, { autoClose: 500 }));
@@ -63,6 +68,7 @@ const SignUp = () => {
 
   // google log in
   const handleGoogle = () => {
+    setSpinner(true);
     googleLogIn().then((res) => {
       const email = res.user.email;
       const user = {
@@ -80,6 +86,7 @@ const SignUp = () => {
           console.log(data);
           localStorage.setItem("access-token", data.token);
         });
+      setSpinner(false);
       navigate("/");
       toast.success("Google log in success", { autoClose: 500 });
     });
@@ -87,6 +94,7 @@ const SignUp = () => {
 
   // twitter log in
   const handleTwitter = () => {
+    setSpinner(true);
     twitterLogIn().then((res) => {
       const userId = res.user.uid;
       const email = `${userId}@gmail.com`;
@@ -105,6 +113,7 @@ const SignUp = () => {
           console.log(data);
           localStorage.setItem("access-token", data.token);
         });
+      setSpinner(false);
       navigate("/");
       toast.success("Twitter log in success", { autoClose: 500 });
     });
@@ -112,6 +121,7 @@ const SignUp = () => {
 
   // github log in
   const handleGithub = () => {
+    setSpinner(true);
     githubLogIn().then((res) => {
       const userId = res.user.uid;
       const email = `${userId}@gmail.com`;
@@ -130,11 +140,18 @@ const SignUp = () => {
           console.log(data);
           localStorage.setItem("access-token", data.token);
         });
-
+      setSpinner(false);
       navigate("/");
       toast.success("Github log in success", { autoClose: 500 });
     });
   };
+  if (spinner) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
   return (
     <section className="bg-white">
       <Helmet>
@@ -143,7 +160,7 @@ const SignUp = () => {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+        <section className="relative flex h-96 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt="Night"
             src={signup}
@@ -155,7 +172,7 @@ const SignUp = () => {
           aria-label="Main"
           className="flex items-center justify-center py-10 sm:px-12 lg:col-span-7 xl:col-span-6 shadow-lg shadow-teal-200 rounded-lg"
         >
-          <div className="max-w-xl lg:max-w-3xl">
+          <div className="w-9/12 mx-auto">
             <h2 className="text-teal-400 font-bold text-center my-4 text-3xl">
               Create an account
             </h2>
