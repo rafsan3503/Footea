@@ -7,7 +7,6 @@ import SignUp from "../Pages/Auth/SignUp";
 import Services from "../Pages/Services/Services";
 import ServiceDetails from "../Pages/Services/ServiceDetails";
 import MyReview from "../Pages/Reviews/MyReview";
-import Faq from "../Pages/FAQ/Faq";
 import PrivateRouter from "./PrivateRouter";
 import AddService from "../Pages/Services/AddService";
 import Blogs from "../Pages/Blogs/Blogs";
@@ -64,10 +63,6 @@ const router = createBrowserRouter([
       {
         path: "blogs",
         element: <Blogs />,
-      },
-      {
-        path: "/faq",
-        element: <Faq />,
       },
     ],
   },

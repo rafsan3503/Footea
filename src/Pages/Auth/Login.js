@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../Assets/login.gif";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { userLogIn, googleLogIn, twitterLogIn, githubLogIn } =
@@ -125,6 +126,12 @@ const Login = () => {
   };
   return (
     <section class="bg-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Footea - Login</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+      ;
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img

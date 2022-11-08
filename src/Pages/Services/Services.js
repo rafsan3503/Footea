@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import loader from "../../Assets/loader.gif";
+import { Helmet } from "react-helmet";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -24,6 +25,11 @@ const Services = () => {
   }
   return (
     <section>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Footea - Service</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div class="mx-auto max-w-screen-xl px-4 py-8">
         <div>
           <span class="inline-block h-1 w-12 bg-teal-700"></span>

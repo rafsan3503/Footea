@@ -86,16 +86,6 @@ const Navbar = () => {
               Blogs
             </Link>
           </li>
-          <li>
-            <Link
-              to="/faq"
-              aria-label="About us"
-              title="FAQ"
-              className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              FAQ
-            </Link>
-          </li>
           {user ? (
             <>
               <li>

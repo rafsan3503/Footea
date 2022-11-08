@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import signup from "../../Assets/signup.gif";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvier/UserContext";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const { createUser, googleLogIn, twitterLogIn, githubLogIn, updateUser } =
@@ -136,6 +137,11 @@ const SignUp = () => {
   };
   return (
     <section className="bg-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Footea - Sign Up</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img

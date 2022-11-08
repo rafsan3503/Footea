@@ -4,6 +4,7 @@ import { AuthContext } from "../../AuthProvier/UserContext";
 import Swal from "sweetalert2";
 import reviewNotFound from "../../Assets/review-not-found.gif";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const MyReview = () => {
   const [reviews, setReviews] = useState([]);
@@ -96,6 +97,11 @@ const MyReview = () => {
   };
   return (
     <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Footea - My Reviews</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <table class="min-w-full divide-y divide-gray-200 text-sm">
         <thead class="bg-gray-100">
           <tr>
