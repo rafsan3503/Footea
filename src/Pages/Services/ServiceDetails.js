@@ -1,12 +1,23 @@
-import { async } from "@firebase/util";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import Reviews from "../Reviews/Reviews";
+import loader from "../../Assets/loader.gif";
 
 const ServiceDetails = () => {
+  const activeService = useLoaderData();
+  const [loading, setLoading] = useState(true);
+  const [service, setService] = useState(activeService);
   // get service details
-  const service = useLoaderData();
+  useEffect(() => {
+    fetch(`https://footeo-server.vercel.app/services/${activeService._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setService(data);
+        setLoading(false);
+      });
+  }, [activeService._id]);
+
   const { _id, name, img, rating, price, description } = service;
 
   // feedback
@@ -54,6 +65,15 @@ const ServiceDetails = () => {
       });
     }
   };
+
+  // spinner div
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
 
   return (
     <section>

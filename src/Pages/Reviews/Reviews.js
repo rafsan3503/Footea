@@ -3,9 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthProvier/UserContext";
 import AddReview from "./AddReview";
 import reviewNotFound from "../../Assets/review-not-found.gif";
+import loader from "../../Assets/loader.gif";
 
 const Reviews = ({ service }) => {
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
   const { name, _id } = service;
@@ -14,8 +16,19 @@ const Reviews = ({ service }) => {
   useEffect(() => {
     fetch(`https://footeo-server.vercel.app/reviews/${_id}`)
       .then((res) => res.json())
-      .then((data) => setReviews(data));
+      .then((data) => {
+        setReviews(data);
+        setLoading(false);
+      });
   }, [_id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

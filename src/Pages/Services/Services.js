@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import { AuthContext } from "../../AuthProvier/UserContext";
 import loader from "../../Assets/loader.gif";
 import { Helmet } from "react-helmet";
 
@@ -11,7 +10,7 @@ const Services = () => {
   const [size, setSize] = useState(3);
   const [page, setPage] = useState(0);
   // loader state
-  const { loading, setLoading } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   // get services data
   useEffect(() => {

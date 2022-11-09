@@ -5,12 +5,16 @@ import Swal from "sweetalert2";
 import reviewNotFound from "../../Assets/review-not-found.gif";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import loader from "../../Assets/loader.gif";
 
 const MyReview = () => {
   const [reviews, setReviews] = useState([]);
   const { user, logOut } = useContext(AuthContext);
   // email for protected api
   const email = user.email || `${user.uid}@gmail.com`;
+
+  // set loader
+  const [loading, setLoading] = useState(true);
 
   // get reviews with jwt empliment
   useEffect(() => {
@@ -27,6 +31,7 @@ const MyReview = () => {
       })
       .then((data) => {
         setReviews(data);
+        setLoading(false);
       });
   }, [email, logOut]);
 
@@ -141,6 +146,15 @@ const MyReview = () => {
       });
     }
   };
+
+  // spinner div
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
   return (
     <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
       <Helmet>
