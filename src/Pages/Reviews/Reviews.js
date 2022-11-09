@@ -15,31 +15,31 @@ const Reviews = ({ service }) => {
       .then((data) => setReviews(data));
   }, [_id]);
   return (
-    <section class="bg-white">
-      <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div class="mx-auto max-w-xl text-center">
-          <h2 class="text-4xl font-bold tracking-tight sm:text-5xl text-teal-500">
+    <section className="bg-white">
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl text-teal-500">
             Read trusted reviews for {name}
           </h2>
         </div>
 
-        <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-1 sm:gap-16 lg:grid-cols-1">
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-1 sm:gap-16 lg:grid-cols-1">
           {reviews.map((review) => (
-            <div className="lg:w-1/2 mx-auto">
+            <div className="lg:w-1/2 mx-auto" key={review._id}>
               <img
                 alt="Woman"
                 src={review.imgUrl}
-                class="mx-auto h-24 w-24 rounded-full object-cover shadow-xl"
+                className="mx-auto h-24 w-24 rounded-full object-cover shadow-xl"
               />
 
-              <blockquote class="-mt-6 flex flex-col justify-between rounded-lg p-12 text-center shadow-xl">
-                <p class="text-lg font-bold text-gray-700">{review.name}</p>
-                <p class="mt-4 text-sm text-gray-500">{review.review}</p>
+              <blockquote className="-mt-6 flex flex-col justify-between rounded-lg p-12 text-center shadow-xl">
+                <p className="text-lg font-bold text-gray-700">{review.name}</p>
+                <p className="mt-4 text-sm text-gray-500">{review.review}</p>
 
-                <div class="mt-8 flex justify-center gap-0.5 text-green-500">
+                <div className="mt-8 flex justify-center gap-0.5 text-green-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    className="h-6 w-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -47,7 +47,7 @@ const Reviews = ({ service }) => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    className="h-6 w-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -55,7 +55,7 @@ const Reviews = ({ service }) => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    className="h-6 w-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -63,7 +63,7 @@ const Reviews = ({ service }) => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    className="h-6 w-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -71,7 +71,7 @@ const Reviews = ({ service }) => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    className="h-6 w-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >

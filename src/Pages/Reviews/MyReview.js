@@ -47,6 +47,7 @@ const MyReview = () => {
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
+              // update all review
               const remaining = reviews.filter((rvw) => rvw._id !== review._id);
               setReviews(remaining);
             }
@@ -59,14 +60,15 @@ const MyReview = () => {
   // update review
   const handleUpdate = async (review) => {
     const { value: text } = await Swal.fire({
+      title: "Update This review",
       input: "textarea",
-      inputLabel: "Update this Review",
       inputValue: review.review,
       inputPlaceholder: "Type your message here...",
       inputAttributes: {
         "aria-label": "Type your message here",
       },
       showCancelButton: true,
+      confirmButtonText: "Update",
     });
 
     const userReview = {
@@ -74,6 +76,7 @@ const MyReview = () => {
     };
 
     if (text) {
+      // update all reviews
       fetch(`https://footeo-server.vercel.app/myreviews/${review._id}`, {
         method: "PUT",
         headers: {
@@ -91,8 +94,29 @@ const MyReview = () => {
                 setReviews(data);
               });
           }
+
+          // update single review
+
+          fetch(`https://footeo-server.vercel.app/myreviews?email=${email}`, {
+            headers: {
+              authorization: localStorage.getItem("access-token"),
+            },
+          })
+            .then((res) => {
+              if (res.status === 401 || res.status === 403) {
+                logOut().then().catch();
+              }
+              return res.json();
+            })
+            .then((data) => {
+              setReviews(data);
+            });
         });
-      Swal.fire("Review updated successfully!");
+
+      Swal.fire({
+        icon: "success",
+        text: "Review updated successfully!",
+      });
     }
   };
   return (

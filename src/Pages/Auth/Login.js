@@ -70,7 +70,6 @@ const Login = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           localStorage.setItem("access-token", data.token);
         });
       setSpinner(false);
@@ -141,27 +140,27 @@ const Login = () => {
     );
   }
   return (
-    <section class="bg-white">
+    <section className="bg-white">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Footea - Login</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       ;
-      <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section class="relative flex h-96 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+        <section className="relative flex h-96 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt="Night"
             src={login}
-            class="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         </section>
 
         <main
           aria-label="Main"
-          class="flex items-center justify-center pb-16 sm:px-12 lg:col-span-7 xl:col-span-6 shadow-lg shadow-teal-200 rounded-lg"
+          className="flex items-center justify-center pb-16 sm:px-12 lg:col-span-7 xl:col-span-6 shadow-lg shadow-teal-200 rounded-lg"
         >
-          <div class="w-9/12 mx-auto">
+          <div className="w-9/12 mx-auto">
             <h2 className="text-teal-400 font-bold text-center my-4 text-3xl">
               Login Now
             </h2>
@@ -218,11 +217,14 @@ const Login = () => {
               <p className="px-3 dark:text-gray-400">OR</p>
               <hr className="w-full dark:text-gray-400" />
             </div>
-            <form onSubmit={handleSubmit} class="mt-8 grid grid-cols-6 gap-6">
-              <div class="col-span-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
+              <div className="col-span-6">
                 <label
-                  for="Email"
-                  class="block text-sm font-medium text-teal-400"
+                  htmlFor="Email"
+                  className="block text-sm font-medium text-teal-400"
                 >
                   Email
                 </label>
@@ -231,14 +233,14 @@ const Login = () => {
                   type="email"
                   name="email"
                   required
-                  class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
+                  className="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>
 
-              <div class="col-span-6 sm:col-span-3">
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  for="Password"
-                  class="block text-sm font-medium text-teal-400"
+                  htmlFor="Password"
+                  className="block text-sm font-medium text-teal-400"
                 >
                   Password
                 </label>
@@ -247,14 +249,14 @@ const Login = () => {
                   type="password"
                   name="password"
                   required
-                  class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
+                  className="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>
 
-              <div class="col-span-6 sm:col-span-3">
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  for="PasswordConfirmation"
-                  class="block text-sm font-medium text-teal-400"
+                  htmlFor="PasswordConfirmation"
+                  className="block text-sm font-medium text-teal-400"
                 >
                   Password Confirmation
                 </label>
@@ -264,17 +266,17 @@ const Login = () => {
                   id="PasswordConfirmation"
                   name="password_confirmation"
                   required
-                  class="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
+                  className="mt-1 w-full rounded-md border-teal-200 p-3 outline-none bg-white text-sm text-teal-700 shadow-md shadow-teal-100"
                 />
               </div>
-              <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button class="inline-block shrink-0 rounded-md border border-teal-600 bg-teal-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-teal-600 focus:outline-none focus:ring active:text-teal-500">
+              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+                <button className="inline-block shrink-0 rounded-md border border-teal-600 bg-teal-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-teal-600 focus:outline-none focus:ring active:text-teal-500">
                   Log In
                 </button>
 
-                <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Dont have an account?
-                  <Link to="/signup" class="text-gray-700 underline">
+                  <Link to="/signup" className="text-gray-700 underline">
                     Sign Up
                   </Link>
                   .

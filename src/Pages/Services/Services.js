@@ -30,21 +30,21 @@ const Services = () => {
         <title>Footea - Service</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <div class="mx-auto max-w-screen-xl px-4 py-8">
+      <div className="mx-auto max-w-screen-xl px-4 py-8">
         <div>
-          <span class="inline-block h-1 w-12 bg-teal-700"></span>
+          <span className="inline-block h-1 w-12 bg-teal-700"></span>
 
-          <h2 class="mt-1 text-2xl text-teal-400 font-extrabold uppercase tracking-wide lg:text-3xl">
+          <h2 className="mt-1 text-2xl text-teal-400 font-extrabold uppercase tracking-wide lg:text-3xl">
             Services
           </h2>
         </div>
 
-        <div class="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-3">
           {services.map((service) => (
-            <Link
+            <div
               key={service._id}
               href="#"
-              class="block shadow-lg shadow-teal-200 rounded-lg"
+              className="block shadow-lg shadow-teal-200 rounded-lg"
             >
               <PhotoProvider>
                 <PhotoView src={service.img}>
@@ -60,12 +60,12 @@ const Services = () => {
                 <h2 className="text-3xl font-bold text-teal-400 my-4">
                   {service.name}
                 </h2>
-                <div class="mt-4 flex items-center justify-between font-medium">
+                <div className="mt-4 flex items-center justify-between font-medium">
                   <p className="text-teal-400 font-semibold">
                     Price: ${service.price}
                   </p>
 
-                  <p class="text-xs uppercase tracking-wide">
+                  <p className="text-xs uppercase tracking-wide">
                     Ratings: {service.rating}
                   </p>
                 </div>
@@ -78,12 +78,12 @@ const Services = () => {
                 </div>
                 <Link
                   to={`/services/${service._id}`}
-                  class="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
+                  className="mt-6 inline-block rounded bg-teal-500 px-6 py-3 text-sm text-white"
                 >
                   View Details &#8594;
                 </Link>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
