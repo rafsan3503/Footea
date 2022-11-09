@@ -13,7 +13,7 @@ const Footer = () => {
             <span className="text-5xl font-bold">TEA</span>
           </div>
 
-          <div className="mt-8 flex gap-6 text-gray-500 sm:mt-0">
+          <div className="mt-8 flex gap-6 text-teal-400 sm:mt-0">
             <Link
               className="hover:opacity-75"
               href=""
@@ -219,7 +219,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <p className="text-xs text-gray-500">&copy; 2022 Company Name</p>
+        <p className="text-xs text-gray-500">&copy; 2022 Footea</p>
       </div>
     </footer>
   );

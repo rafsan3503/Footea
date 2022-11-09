@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import addProduct from "../../Assets/add-products.gif";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../../AuthProvier/UserContext";
 
 const AddService = () => {
+  const { logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleAddProduct = (event) => {
     event.preventDefault();
@@ -28,10 +30,16 @@ const AddService = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: localStorage.getItem("access-token"),
       },
       body: JSON.stringify(service),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          logOut().then().catch();
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.acknowledged) {
           Swal.fire({

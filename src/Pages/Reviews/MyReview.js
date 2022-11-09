@@ -42,10 +42,17 @@ const MyReview = () => {
       if (result.isConfirmed) {
         fetch(`https://footeo-server.vercel.app/myreviews/${review._id}`, {
           method: "DELETE",
+          headers: {
+            authorization: localStorage.getItem("access-token"),
+          },
         })
-          .then((res) => res.json())
+          .then((res) => {
+            if (res.status === 401 || res.status === 403) {
+              logOut().then().catch();
+            }
+            return res.json();
+          })
           .then((data) => {
-            console.log(data);
             if (data.deletedCount > 0) {
               // update all review
               const remaining = reviews.filter((rvw) => rvw._id !== review._id);
@@ -81,10 +88,16 @@ const MyReview = () => {
         method: "PUT",
         headers: {
           "content-type": "application/json",
+          authorization: localStorage.getItem("access-token"),
         },
         body: JSON.stringify(userReview),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            logOut().then().catch();
+          }
+          return res.json();
+        })
         .then((data) => {
           console.log(data);
           if (data.modifiedCount > 0) {
