@@ -4,7 +4,7 @@ const Gallery = () => {
   return (
     <section className="py-6 dark:bg-gray-800 dark:text-gray-50">
       <h2 className="text-3xl font-bold text-teal-500 sm:text-4xl text-center py-6">
-        Our Gallery
+        My Gallery
       </h2>
       <div className="container grid grid-cols-2 gap-4 p-4 mx-auto md:grid-cols-4">
         <img

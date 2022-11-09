@@ -9,7 +9,10 @@ import { Helmet } from "react-helmet";
 const MyReview = () => {
   const [reviews, setReviews] = useState([]);
   const { user, logOut } = useContext(AuthContext);
+  // email for protected api
   const email = user.email || `${user.uid}@gmail.com`;
+
+  // get reviews with jwt empliment
   useEffect(() => {
     fetch(`https://footeo-server.vercel.app/myreviews?email=${email}`, {
       headers: {

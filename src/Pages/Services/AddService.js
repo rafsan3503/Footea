@@ -8,6 +8,8 @@ import { AuthContext } from "../../AuthProvier/UserContext";
 const AddService = () => {
   const { logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // add product
   const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,6 +19,7 @@ const AddService = () => {
     const rating = form.rating.value;
     const description = form.description.value;
 
+    // create service
     const service = {
       name,
       img,
@@ -26,6 +29,7 @@ const AddService = () => {
       date: new Date(),
     };
 
+    // post service
     fetch("https://footeo-server.vercel.app/services", {
       method: "POST",
       headers: {

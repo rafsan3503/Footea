@@ -1,6 +1,8 @@
 import React from "react";
 import Swal from "sweetalert2";
 
+// newsletter alert
+
 const NewsLetter = () => {
   const handleSubscribe = (event) => {
     event.preventDefault();
@@ -16,7 +18,7 @@ const NewsLetter = () => {
       <div className="p-8 md:p-12 lg:px-16 lg:py-24">
         <div className="mx-auto max-w-lg text-center">
           <h2 className="text-2xl font-bold text-teal-500 md:text-3xl">
-            Subscribe to our NewsLetter
+            Subscribe to My NewsLetter
           </h2>
         </div>
 

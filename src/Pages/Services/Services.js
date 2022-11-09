@@ -10,7 +10,10 @@ const Services = () => {
   const [count, setCount] = useState(0);
   const [size, setSize] = useState(3);
   const [page, setPage] = useState(0);
+  // loader state
   const { loading, setLoading } = useContext(AuthContext);
+
+  // get services data
   useEffect(() => {
     fetch(`https://footeo-server.vercel.app/services?size=${size}&page=${page}`)
       .then((res) => res.json())
@@ -21,8 +24,10 @@ const Services = () => {
       });
   }, [setLoading, page, size]);
 
+  // pages for pagination
   const pages = Math.ceil(count / size);
 
+  // spinner div
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">

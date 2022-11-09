@@ -4,11 +4,14 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const ServicesBanner = () => {
   const [services, setServices] = useState([]);
+
+  // get services from database
   useEffect(() => {
     fetch("https://footeo-server.vercel.app/services?resize=3")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
@@ -25,6 +28,7 @@ const ServicesBanner = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-4 lg:col-span-2 lg:grid-cols-3 lg:py-12">
+            {/* show 3 services  */}
             {services.map((service) => (
               <div
                 key={service._id}
@@ -78,6 +82,7 @@ const ServicesBanner = () => {
             ))}
           </div>
 
+          {/* change route to services  */}
           <div className="text-center">
             <Link
               to="/services"

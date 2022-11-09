@@ -4,6 +4,8 @@ import { AuthContext } from "../../AuthProvier/UserContext";
 
 const AddReview = ({ id, setReviews, serviceName }) => {
   const { user } = useContext(AuthContext);
+
+  // submit review
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -11,6 +13,8 @@ const AddReview = ({ id, setReviews, serviceName }) => {
     const email = form.email.value;
     const photoUrl = form.photoUrl.value;
     const review = form.review.value;
+
+    // creare review object
 
     const userReview = {
       name: name,
@@ -23,6 +27,7 @@ const AddReview = ({ id, setReviews, serviceName }) => {
       date: new Date(),
     };
 
+    // post review
     fetch("https://footeo-server.vercel.app/reviews", {
       method: "POST",
       headers: {

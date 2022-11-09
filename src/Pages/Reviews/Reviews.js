@@ -9,6 +9,8 @@ const Reviews = ({ service }) => {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
   const { name, _id } = service;
+
+  // get all reviews for services
   useEffect(() => {
     fetch(`https://footeo-server.vercel.app/reviews/${_id}`)
       .then((res) => res.json())
@@ -82,11 +84,12 @@ const Reviews = ({ service }) => {
             </div>
           ))}
         </div>
+        {/* conditional div  */}
         {reviews.length === 0 && (
           <div className="text-center">
             <img src={reviewNotFound} alt="" className="w-1/2 mx-auto" />
             <h2 className="text-red-500 font-bold">
-              No Review Found!! please add some{" "}
+              No Review Found!! please add{" "}
             </h2>
           </div>
         )}

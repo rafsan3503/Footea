@@ -7,11 +7,17 @@ import { Helmet } from "react-helmet";
 import loader from "../../Assets/loader.gif";
 
 const SignUp = () => {
+  // get nessecery function from context
   const { createUser, googleLogIn, twitterLogIn, githubLogIn, updateUser } =
     useContext(AuthContext);
+
+  // spinner
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
+
+  // email submit
   const handleSubmit = (event) => {
+    // spinner enable
     setSpinner(true);
     event.preventDefault();
     const form = event.target;
@@ -54,8 +60,9 @@ const SignUp = () => {
             })
               .then((res) => res.json())
               .then((data) => {
-                console.log(data);
+                // jwt token save to localStorage
                 localStorage.setItem("access-token", data.token);
+                // spinner disable
                 setSpinner(false);
                 navigate("/");
               });
@@ -78,6 +85,7 @@ const SignUp = () => {
         const user = {
           email,
         };
+        // get jwt token and save
         fetch("https://footeo-server.vercel.app/jwt", {
           method: "POST",
           headers: {
@@ -164,6 +172,8 @@ const SignUp = () => {
         toast.error(err.message({ autoClose: 500 }));
       });
   };
+
+  // spinner div
   if (spinner) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">

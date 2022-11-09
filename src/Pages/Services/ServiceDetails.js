@@ -5,9 +5,11 @@ import Swal from "sweetalert2";
 import Reviews from "../Reviews/Reviews";
 
 const ServiceDetails = () => {
+  // get service details
   const service = useLoaderData();
   const { _id, name, img, rating, price, description } = service;
 
+  // feedback
   const handleFeedback = async (event) => {
     event.preventDefault();
     const inputOptions = new Promise((resolve) => {
@@ -36,6 +38,7 @@ const ServiceDetails = () => {
     }
   };
 
+  // notify
   const handleNotify = async () => {
     const { value: email } = await Swal.fire({
       title: "Input email address",

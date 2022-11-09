@@ -51,6 +51,7 @@ const Navbar = () => {
               Services
             </Link>
           </li>
+          {/* conditonal menu  */}
           {user && (
             <>
               <li>
@@ -120,6 +121,8 @@ const Navbar = () => {
             </li>
           )}
         </ul>
+
+        {/* mobile nav  */}
         <div className="lg:hidden z-10">
           <button
             aria-label="Open Menu"

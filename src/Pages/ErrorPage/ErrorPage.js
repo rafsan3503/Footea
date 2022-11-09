@@ -3,6 +3,7 @@ import { Link, useRouteError } from "react-router-dom";
 import errorimg from "../../Assets/error.gif";
 
 const ErrorPage = () => {
+  // get error from react
   const error = useRouteError();
   return (
     <div className="grid min-h-screen place-content-center bg-white">

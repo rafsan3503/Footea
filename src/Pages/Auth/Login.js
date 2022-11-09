@@ -7,20 +7,27 @@ import { Helmet } from "react-helmet";
 import loader from "../../Assets/loader.gif";
 
 const Login = () => {
+  // get all nessecary data from context
   const { userLogIn, googleLogIn, twitterLogIn, githubLogIn } =
     useContext(AuthContext);
+  // spinner state
   const [spinner, setSpinner] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  // get pathname from private/protected route
   const from = location.state?.from?.pathname || "/";
 
+  // email log in
   const handleSubmit = (event) => {
+    // spinner enable
     setSpinner(true);
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     const confirm = form.password_confirmation.value;
+
+    // password match
     if (password !== confirm) {
       toast.error("password does not match", { autoClose: 500 });
       return;
@@ -33,6 +40,8 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         navigate(from, { replace: true });
+
+        // get and save jwt token
         fetch("https://footeo-server.vercel.app/jwt", {
           method: "POST",
           headers: {
@@ -150,6 +159,8 @@ const Login = () => {
         toast.error(err.message({ autoClose: 500 }));
       });
   };
+
+  // spinner div
   if (spinner) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
