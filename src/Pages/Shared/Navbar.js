@@ -229,7 +229,7 @@ const Navbar = () => {
                       <>
                         <li>
                           <div className="relative flex-shrink-0">
-                            <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-600 rounded-full text-gray-100"></span>
+                            <span className="absolute bottom-0 hidden lg:block right-0 w-4 h-4 bg-green-600 rounded-full text-gray-100"></span>
                             <img
                               src={user.photoURL ? user.photoURL : userImg}
                               alt=""

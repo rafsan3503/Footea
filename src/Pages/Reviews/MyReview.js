@@ -17,7 +17,7 @@ const MyReview = () => {
       },
     })
       .then((res) => {
-        if (res.status(401) || res.status(403)) {
+        if (res.status === 401 || res.status === 403) {
           logOut().then().catch();
         }
         return res.json();
@@ -25,7 +25,7 @@ const MyReview = () => {
       .then((data) => {
         setReviews(data);
       });
-  }, [email]);
+  }, [email, logOut]);
 
   // delete review
 
@@ -96,124 +96,124 @@ const MyReview = () => {
     }
   };
   return (
-    <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
+    <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Footea - My Reviews</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <table class="min-w-full divide-y divide-gray-200 text-sm">
-        <thead class="bg-gray-100">
+      <table className="min-w-full divide-y divide-gray-200 text-sm">
+        <thead className="bg-gray-100">
           <tr>
-            <th class="sticky inset-y-0 left-0 bg-gray-100 px-4 py-2 text-left"></th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-              <div class="flex items-center gap-2">
+            <th className="sticky inset-y-0 left-0 bg-gray-100 px-4 py-2 text-left"></th>
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+              <div className="flex items-center gap-2">
                 Date
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-700"
+                  className="h-4 w-4 text-gray-700"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </div>
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-              <div class="flex items-center gap-2">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+              <div className="flex items-center gap-2">
                 Service Name
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-700"
+                  className="h-4 w-4 text-gray-700"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </div>
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-              <div class="flex items-center gap-2">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+              <div className="flex items-center gap-2">
                 Review
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-700"
+                  className="h-4 w-4 text-gray-700"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </div>
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-              <div class="flex items-center gap-2">
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+              <div className="flex items-center gap-2">
                 ReviewId
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-700"
+                  className="h-4 w-4 text-gray-700"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </div>
             </th>
-            <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"></th>
+            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"></th>
           </tr>
         </thead>
 
-        <tbody class="divide-y divide-gray-200">
+        <tbody className="divide-y divide-gray-200">
           {reviews.map((review) => (
-            <tr>
+            <tr key={review._id}>
               <td
                 onClick={() => handleDelete(review)}
-                class="sticky inset-y-0 left-0 bg-white px-4 py-2"
+                className="sticky inset-y-0 left-0 bg-white px-4 py-2"
               >
-                <strong class="rounded bg-red-100 text-xs font-medium text-red-700">
+                <strong className="rounded bg-red-100 text-xs font-medium text-red-700">
                   <FaTrash />
                 </strong>
               </td>
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 {review.date.slice(0, 10)}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {review.serviceName}
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {review.review.length > 20
                   ? review.review.slice(0, 20) + "..."
                   : review.review}
                 <Link
                   to={`/services/${review.serviceId}`}
-                  class="inline-block rounded bg-teal-500 px-2 py-2 mx-3 text-sm text-white"
+                  className="inline-block rounded bg-teal-500 px-2 py-2 mx-3 text-sm text-white"
                 >
                   View
                 </Link>
               </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {review.serviceId}
               </td>
               <td
                 onClick={() => handleUpdate(review)}
-                class="whitespace-nowrap px-4 py-2 flex items-center"
+                className="whitespace-nowrap px-4 py-2 flex items-center"
               >
-                <strong class="rounded bg-teal-100 text-xs font-medium text-teal-400 p-2 cursor-pointer">
+                <strong className="rounded bg-teal-100 text-xs font-medium text-teal-400 p-2 cursor-pointer">
                   Update
                 </strong>
               </td>
@@ -232,7 +232,7 @@ const MyReview = () => {
           </h2>
           <Link
             to="/services"
-            class="my-6 inline-block rounded border-2 border-teal-200 font-medium text-teal-500 hover:bg-teal-500 px-6 py-3 text-lg hover:text-white"
+            className="my-6 inline-block rounded border-2 border-teal-200 font-medium text-teal-500 hover:bg-teal-500 px-6 py-3 text-lg hover:text-white"
           >
             Go to services &#8594;
           </Link>
