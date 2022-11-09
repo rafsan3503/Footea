@@ -44,9 +44,10 @@ const Login = () => {
           .then((data) => {
             console.log(data);
             localStorage.setItem("access-token", data.token);
+            navigate(from, { replace: true });
           });
         setSpinner(false);
-        navigate(from, { replace: true });
+
         toast.success("Log in success!!", { autoClose: 500 });
       })
       .catch((err) => {
@@ -73,9 +74,10 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("access-token", data.token);
+            navigate(from, { replace: true });
           });
         setSpinner(false);
-        navigate(from, { replace: true });
+
         toast.success("Google log in success", { autoClose: 500 });
       })
       .catch((err) => {
@@ -103,11 +105,11 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("access-token", data.token);
+            navigate(from, { replace: true });
           });
         setSpinner(false);
-        navigate(from, { replace: true });
+
         toast.success("Twitter log in success", { autoClose: 500 });
       })
       .catch((err) => {
@@ -136,11 +138,11 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("access-token", data.token);
+            navigate(from, { replace: true });
           });
 
         setSpinner(false);
 
-        navigate(from, { replace: true });
         toast.success("Github log in success", { autoClose: 500 });
       })
       .catch((err) => {

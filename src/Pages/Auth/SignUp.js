@@ -89,9 +89,10 @@ const SignUp = () => {
           .then((data) => {
             console.log(data);
             localStorage.setItem("access-token", data.token);
+            navigate("/");
           });
         setSpinner(false);
-        navigate("/");
+
         toast.success("Google log in success", { autoClose: 500 });
       })
       .catch((err) => {
@@ -121,9 +122,9 @@ const SignUp = () => {
           .then((data) => {
             console.log(data);
             localStorage.setItem("access-token", data.token);
+            navigate("/");
           });
         setSpinner(false);
-        navigate("/");
         toast.success("Twitter log in success", { autoClose: 500 });
       })
       .catch((err) => {
@@ -151,11 +152,11 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("access-token", data.token);
+            navigate("/");
           });
         setSpinner(false);
-        navigate("/");
+
         toast.success("Github log in success", { autoClose: 500 });
       })
       .catch((err) => {

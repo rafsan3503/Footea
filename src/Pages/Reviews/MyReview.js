@@ -69,6 +69,12 @@ const MyReview = () => {
     const { value: text } = await Swal.fire({
       title: "Update This review",
       input: "textarea",
+      background: "none",
+      color: "aqua",
+      backdrop: "blur(10px)",
+      text: review.review,
+      imageWidth: 100,
+      imageHeight: 100,
       inputValue: review.review,
       inputPlaceholder: "Type your message here...",
       inputAttributes: {
@@ -256,17 +262,12 @@ const MyReview = () => {
               </td>
             </tr>
           ))}
-          {/* {reviews || (
-            <img src={reviewNotFound} className="w-11/12 mx-auto" alt="" />
-          )} */}
         </tbody>
       </table>
       {reviews.length === 0 && (
         <div className="text-center">
           <img src={reviewNotFound} alt="" className="w-1/2 mx-auto" />
-          <h2 className="text-red-500 font-bold">
-            No Review Found!! please add some{" "}
-          </h2>
+          <h2 className="text-red-500 font-bold">No Review were added </h2>
           <Link
             to="/services"
             className="my-6 inline-block rounded border-2 border-teal-200 font-medium text-teal-500 hover:bg-teal-500 px-6 py-3 text-lg hover:text-white"
