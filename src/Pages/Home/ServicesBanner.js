@@ -5,7 +5,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 const ServicesBanner = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("https://footeo-server.vercel.app/services?size=3")
+    fetch("https://footeo-server.vercel.app/services?resize=3")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);

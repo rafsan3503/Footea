@@ -50,87 +50,103 @@ const Login = () => {
         toast.success("Log in success!!", { autoClose: 500 });
       })
       .catch((err) => {
+        setSpinner(false);
         toast.error(err.message, { autoClose: 500 });
       });
   };
   // google log in
   const handleGoogle = () => {
     setSpinner(true);
-    googleLogIn().then((res) => {
-      const email = res.user.email;
-      const user = {
-        email,
-      };
-      fetch("https://footeo-server.vercel.app/jwt", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
+    googleLogIn()
+      .then((res) => {
+        const email = res.user.email;
+        const user = {
+          email,
+        };
+        fetch("https://footeo-server.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("access-token", data.token);
+          });
+        setSpinner(false);
+        navigate(from, { replace: true });
+        toast.success("Google log in success", { autoClose: 500 });
       })
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem("access-token", data.token);
-        });
-      setSpinner(false);
-      navigate(from, { replace: true });
-      toast.success("Google log in success", { autoClose: 500 });
-    });
+      .catch((err) => {
+        setSpinner(false);
+        toast.error(err.message({ autoClose: 500 }));
+      });
   };
 
   // twitter log in
   const handleTwitter = () => {
     setSpinner(true);
-    twitterLogIn().then((res) => {
-      const userId = res.user.uid;
-      const email = `${userId}@gmail.com`;
-      const user = {
-        email,
-      };
-      fetch("https://footeo-server.vercel.app/jwt", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
+    twitterLogIn()
+      .then((res) => {
+        const userId = res.user.uid;
+        const email = `${userId}@gmail.com`;
+        const user = {
+          email,
+        };
+        fetch("https://footeo-server.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.token);
+          });
+        setSpinner(false);
+        navigate(from, { replace: true });
+        toast.success("Twitter log in success", { autoClose: 500 });
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          localStorage.setItem("access-token", data.token);
-        });
-      setSpinner(false);
-      navigate(from, { replace: true });
-      toast.success("Twitter log in success", { autoClose: 500 });
-    });
+      .catch((err) => {
+        setSpinner(false);
+        toast.error(err.message({ autoClose: 500 }));
+      });
   };
 
   // github log in
   const handleGithub = () => {
     setSpinner(true);
-    githubLogIn().then((res) => {
-      const userId = res.user.uid;
-      const email = `${userId}@gmail.com`;
-      const user = {
-        email,
-      };
-      fetch("https://footeo-server.vercel.app/jwt", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
+    githubLogIn()
+      .then((res) => {
+        const userId = res.user.uid;
+        const email = `${userId}@gmail.com`;
+        const user = {
+          email,
+        };
+        fetch("https://footeo-server.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("access-token", data.token);
+          });
+
+        setSpinner(false);
+
+        navigate(from, { replace: true });
+        toast.success("Github log in success", { autoClose: 500 });
       })
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem("access-token", data.token);
-        });
-
-      setSpinner(false);
-
-      navigate(from, { replace: true });
-      toast.success("Github log in success", { autoClose: 500 });
-    });
+      .catch((err) => {
+        setSpinner(false);
+        toast.error(err.message({ autoClose: 500 }));
+      });
   };
   if (spinner) {
     return (

@@ -7,15 +7,22 @@ import { Helmet } from "react-helmet";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  const [count, setCount] = useState(0);
+  const [size, setSize] = useState(3);
+  const [page, setPage] = useState(0);
   const { loading, setLoading } = useContext(AuthContext);
   useEffect(() => {
-    fetch("https://footeo-server.vercel.app/services")
+    fetch(`https://footeo-server.vercel.app/services?size=${size}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {
-        setServices(data);
+        setServices(data.services);
+        setCount(data.count);
         setLoading(false);
       });
-  }, [setLoading]);
+  }, [setLoading, page, size]);
+
+  const pages = Math.ceil(count / size);
+
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -87,6 +94,30 @@ const Services = () => {
           ))}
         </div>
       </div>
+      <ol className="flex justify-center gap-1 text-xs font-medium">
+        {[...Array(pages).keys()].map((number) => (
+          <li key={number}>
+            <Link
+              onClick={() => setPage(number)}
+              href="#"
+              className="block h-8 w-8 rounded border border-gray-100 text-center leading-8"
+            >
+              {number + 1}
+            </Link>
+          </li>
+        ))}
+        <li>
+          <select
+            className="block h-8 w-8 rounded border border-gray-100 outline-teal-200 text-center leading-8"
+            onChange={(event) => setSize(event.target.value)}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+          </select>
+        </li>
+      </ol>
     </section>
   );
 };
