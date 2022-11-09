@@ -21,7 +21,6 @@ const Navbar = () => {
         <Link
           href="/"
           aria-label="Company"
-          title="Company"
           className="inline-flex items-center"
         >
           <div className="flex text-teal-400 items-center">
@@ -35,7 +34,6 @@ const Navbar = () => {
             <Link
               to="/"
               aria-label="Our product"
-              title="Home"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Home
@@ -45,7 +43,6 @@ const Navbar = () => {
             <Link
               to="/services"
               aria-label="Our product"
-              title="Home"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Services
@@ -58,7 +55,6 @@ const Navbar = () => {
                 <Link
                   to="/myreviews"
                   aria-label="Our product"
-                  title="My Review"
                   className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   My Reviews
@@ -68,7 +64,6 @@ const Navbar = () => {
                 <Link
                   to="/addservice"
                   aria-label="Product pricing"
-                  title="Product pricing"
                   className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   Add Service
@@ -80,7 +75,6 @@ const Navbar = () => {
             <Link
               to="/blogs"
               aria-label="About us"
-              title="Blogs"
               className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Blogs
@@ -113,7 +107,6 @@ const Navbar = () => {
               <Link
                 to="/Login"
                 aria-label="Sign in"
-                title="Sign in"
                 className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Log In
@@ -126,7 +119,6 @@ const Navbar = () => {
         <div className="lg:hidden z-10">
           <button
             aria-label="Open Menu"
-            title="Open Menu"
             className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
             onClick={() => setIsMenuOpen(true)}
           >
@@ -159,7 +151,6 @@ const Navbar = () => {
                   <div>
                     <button
                       aria-label="Close Menu"
-                      title="Close Menu"
                       className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -178,7 +169,6 @@ const Navbar = () => {
                       <Link
                         to="/"
                         aria-label="Our product"
-                        title="Home"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Home
@@ -188,7 +178,6 @@ const Navbar = () => {
                       <Link
                         to="/services"
                         aria-label="Our product"
-                        title="Home"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Services
@@ -200,7 +189,6 @@ const Navbar = () => {
                           <Link
                             to="/myreviews"
                             aria-label="Our product"
-                            title="My Review"
                             className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
                             My Reviews
@@ -210,7 +198,6 @@ const Navbar = () => {
                           <Link
                             to="/addservice"
                             aria-label="Product pricing"
-                            title="Product pricing"
                             className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
                             Add Service
@@ -222,7 +209,6 @@ const Navbar = () => {
                       <Link
                         to="/blogs"
                         aria-label="About us"
-                        title="Blogs"
                         className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Blogs
@@ -255,7 +241,6 @@ const Navbar = () => {
                         <Link
                           to="/Login"
                           aria-label="Sign in"
-                          title="Sign in"
                           className="font-medium tracking-wide text-teal-400 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Log In
